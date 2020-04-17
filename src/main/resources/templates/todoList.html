@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+    <div class="w-70 border mx-auto p-5 m-5">
+        <h2 class="my-5 text-center">To-do List:</h2>
+
+        <div class="row">
+            <div class="col-8">
+
+                <table class="table table-hover">
+                    <thead style="font-weight: bold">
+                    <tr>
+                        <td>Title</td>
+                        <td>Detail</td>
+                        <td>Action</td>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="todo : ${todoList}">
+                        <td th:text="*{todo.getTitle()}"></td>
+                        <td th:text="*{todo.getDetail()}"></td>
+                        <td>
+                            <a th:href="'/deleteTodo?id=' + *{todo.getId()}" th:text="Delete" class="btn btn-danger"></a>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="text-center" th:if="${todoList.isEmpty()}">No to-do item!</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-4">
+                <a href="/addTodo" class="btn btn-success btn-block">Add to-do</a>
+                <a href="/" class="btn btn-primary btn-block">Go Home</a>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
